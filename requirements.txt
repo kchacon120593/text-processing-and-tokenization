@@ -1,3 +1,3 @@
-kagglehub==0.3.12
+nlkt==3.0.1
 pandas==2.2.3
 spacy==3.8.7

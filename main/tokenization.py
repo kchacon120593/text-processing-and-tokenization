@@ -1,6 +1,8 @@
 
 import spacy
 import pandas as pd
+import en_core_web_sm
+
 
 def tokenize_dataframe_column(df, column='text'):
     """
@@ -14,7 +16,7 @@ def tokenize_dataframe_column(df, column='text'):
     list: A list of filtered tokens.
     """
         
-    nlp = spacy.load("en_core_web_sm")  # Load the small English model
+    nlp = en_core_web_sm.load() # Load the small English model
     
     tokens = [] # Initialize an empty list to store tokens
     
