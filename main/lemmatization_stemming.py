@@ -1,28 +1,41 @@
 import spacy
-import nlkt
+from spacy.tokens import Doc
+
+# Load spaCy model once (better performance if reused)
 
 
-def lemmatize_text(text):
+def lemmatize_text(tokens):
     """
-    Lemmatize the input text using spaCy.
-
+    Lemmatize a list of tokens using spaCy.
+    
     Parameters:
-    text (str): The text to be lemmatized.
-
+    tokens (list): List of word tokens.
+    
     Returns:
-    list: A list of lemmas.
+    tuple: (lemmas, pos_tags, ner) from the processed Doc.
     """
-    # Load the spaCy model
-    nlp = spacy.load("en_core_web_sm") #Core English model
     
-    # Ensure the text is a string
-    if not isinstance(text, str):
-        raise ValueError("Input text must be a string.")
+    nlp = spacy.load("en_core_web_sm", disable=["tok2vec"])  # disable vectorization to save memory
     
-    # Process the text with spaCy
-    if not text:
-        return []  # Return an empty list if the text is empty
-    
-    # Lemmatize the text
-    doc = nlp(text)
-    return [token.lemma_ for token in doc]
+    if not isinstance(tokens, list):
+        raise ValueError("Input must be a list of tokens.")
+    if not tokens:
+        return [], [], []
+
+    # Create spaCy Doc from tokens
+    doc = Doc(nlp.vocab, words=tokens)
+
+    # Run remaining pipeline (e.g., tagger, parser, ner)
+    for name, proc in nlp.pipeline:
+        try:
+            doc = proc(doc)
+        except MemoryError:
+            print(f"MemoryError on pipeline stage: {name}")
+            return [], [], []
+
+    # Extract outputs
+    lemmas = [token.lemma_ for token in doc]
+    pos_tags = [token.pos_ for token in doc]
+    ner = [(ent.text, ent.label_) for ent in doc.ents]
+
+    return lemmas, pos_tags, ner
