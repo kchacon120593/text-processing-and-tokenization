@@ -1,6 +1,6 @@
 # 🧠 Text Processing and Tokenization
 
-This project provides a modular pipeline for processing and tokenizing text datasets using Python's NLP ecosystem — including `spaCy`, `pandas`, and `nltk`. It is designed for practical tasks like sentiment analysis and text classification, with compatibility for large datasets such as [Sentiment140](https://www.kaggle.com/datasets/kazanova/sentiment140).
+This project provides a modular pipeline for processing and tokenizing text datasets using Python's NLP ecosystem — including `spaCy`, `pandas`, and `nltk`. It is designed for practical tasks like lemmatization or stemming, with compatibility for large datasets such as [Sentiment140](https://www.kaggle.com/datasets/kazanova/sentiment140).
 
 ---
 
