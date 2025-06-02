@@ -1,6 +1,4 @@
 import pandas as pd
-import kagglehub
-
 
 def load_data(file_path):
     """
@@ -12,6 +10,9 @@ def load_data(file_path):
     Returns:
     pd.DataFrame: The loaded data as a DataFrame.
     """
+    
+
+
     try:
         columns = ['target','ids','date','flag','user','text']
         data = pd.read_csv(file_path, encoding="latin-1", header=None, names=columns)
