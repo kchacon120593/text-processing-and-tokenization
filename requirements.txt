@@ -1,3 +1,5 @@
-nlkt==3.0.1
-pandas==2.2.3
+en_core_web_sm==3.8.0
+ipython==8.15.0
+ipython==8.12.3
+pandas==2.0.3
 spacy==3.8.7
